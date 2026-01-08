@@ -1,66 +1,154 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Backend API with XAMPP MySQL
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Overview
 
-## About Laravel
+This is a **Laravel 10 backend API** for managing tasks and projects. It provides features such as:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   CRUD operations for tasks and projects
+-   Task filtering by status and project
+-   Pagination support
+-   API responses in JSON format
+-   Error handling with logging
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   **Backend Framework:** Laravel 10
+-   **Database:** MySQL (XAMPP)
+-   **Routing:** Laravel API Routes
+-   **HTTP Client:** Axios (frontend integration)
+-   **Authentication:** Optional (Laravel Sanctum / JWT)
 
-## Learning Laravel
+## Project Structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+app/
+├─ Http/
+│  ├─ Controllers/
+│  │  ├─ TaskController.php
+│  │  └─ ProjectController.php
+│  └─ Requests/  # Optional: Form Request validations
+├─ Models/
+│  ├─ Task.php
+│  └─ Project.php
+routes/
+├─ api.php          # API routes
+├─ web.php          # Web routes (optional)
+database/
+├─ migrations/     # Task and Project table migrations
+├─ seeders/         # Optional database seeders
+public/
+├─ database.sql     # SQL file Take it and create database in your system and import it
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Prerequisites
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   PHP 8.1+
+-   Composer 2+
+-   Node.js (for frontend, optional)
+-   XAMPP (MySQL)
+-   Git (optional)
 
-## Laravel Sponsors
+## Setup Instructions
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone the Repository
 
-### Premium Partners
+```bash
+git clone https://github.com/navdeeppathan/laravel_assignment_backend_laravel.git
+cd laravel-backend
+composer install
+cp .env.example .env
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2. Configure Database
 
-## Contributing
+Edit & Place the `.env` file:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_assignment
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Code of Conduct
+### 3. Create the Database
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Open **phpMyAdmin** at `http://localhost/phpmyadmin/`
+2. Click **New**, enter database name `laravel_assignment`, click **Create**
 
-## Security Vulnerabilities
+### 4. Import SQL File
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Your SQL file is in `public/database.sql`
 
-## License
+**Option A: Using phpMyAdmin**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Go to your database in phpMyAdmin
+2. Click **Import**
+3. Choose the SQL file (`public/database.sql`)
+4. Click **Go**
+
+**Option B: Using Command Line**
+
+```bash
+cd C:\xampp\mysql\bin
+mysql -u root -p your_database_name < C:\xampp\htdocs\your_project\public\database.sql
+```
+
+### 5. Run Migrations (Optional)
+
+If you want to run Laravel migrations on a fresh database:
+
+```bash
+php artisan migrate
+```
+
+> **Note:** Skip if your SQL file already contains all tables.
+
+### 6. Run Development Server
+
+```bash
+php artisan serve
+```
+
+-   The backend will run at `http://127.0.0.1:8000`
+
+## API Endpoints
+
+**Base URL:** `http://127.0.0.1:8000/api`
+
+### Tasks
+
+-   `GET /tasks` → List tasks (supports filters: `status`, `project_id`, `search`, pagination)
+-   `GET /tasks/{id}` → Get single task
+-   `POST /tasks` → Create task
+-   `PUT /tasks/{id}` → Update task
+-   `DELETE /tasks/{id}` → Delete task
+-   `PATCH /tasks/status` → Update task status
+
+### Projects
+
+-   `GET /projects` → List projects (with task count)
+-   `POST /projects` → Create project
+
+## Features
+
+### Task Management
+
+-   Create, read, update, delete tasks
+-   Update task status separately
+-   Filter by project or status
+-   Search tasks by title
+-   Pagination support
+
+### Project Management
+
+-   Create and list projects
+-   View task count per project
+
+## Error Handling
+
+-   Validation errors return JSON with error messages
+-   Exceptions are logged in `storage/logs/laravel.log`
+-   API returns proper HTTP status codes for su
