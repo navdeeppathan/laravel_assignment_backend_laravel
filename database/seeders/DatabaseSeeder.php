@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Project;
+use App\Models\Task;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +14,49 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $projects = [
+            [
+                'name' => 'Website Development',
+                'description' => 'Corporate website and admin panel',
+               
+            ],
+            [
+                'name' => 'Mobile App',
+                'description' => 'Android & iOS application',
+                
+            ],
+            [
+                'name' => 'CRM System',
+                'description' => 'Customer relationship management software',
+               
+            ],
+        ];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach ($projects as $p) {
+            $project = Project::create($p);
+
+           
+            // Create 3 tasks for this project
+            Task::create([
+                'project_id' => $project->id,
+                'title' => 'Requirement Analysis',
+                'status' => 'Pending',
+                'due_date' => Carbon::now()->addDays(5),
+            ]);
+
+            Task::create([
+                'project_id' => $project->id,
+                'title' => 'UI Design',
+                'status' => 'Pending',
+                'due_date' => Carbon::now()->addDays(10),
+            ]);
+
+            Task::create([
+                'project_id' => $project->id,
+                'title' => 'Development',
+                'status' => 'Pending',
+                'due_date' => Carbon::now()->addDays(20),
+            ]);
+        }
     }
 }

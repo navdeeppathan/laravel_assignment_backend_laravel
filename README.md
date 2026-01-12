@@ -106,6 +106,26 @@ php artisan migrate
 
 > **Note:** Skip if your SQL file already contains all tables.
 
+### Seed Demo Data
+
+The project contains a database seeder that automatically creates:
+
+3 Projects
+
+Each project has 3 Tasks
+
+Run:
+
+```bash
+php artisan db:seed
+```
+
+Or reset and seed again:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
 ### 6. Run Development Server
 
 ```bash
